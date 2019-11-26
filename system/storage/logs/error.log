@@ -1,0 +1,1 @@
+2019-11-26 15:09:49 - PHP Warning:  realpath(): open_basedir restriction in effect. File(/home/e1895293) is not within the allowed path(s): (/home/e1895293/www:/home/e1895293/prive:/tmp:/usr/share/php:/var/lib/php) in /home/e1895293/www/tp2opencart/admin/controller/common/security.php on line 26
