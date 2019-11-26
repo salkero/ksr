@@ -3,8 +3,8 @@ class ModelVisitedVisited extends Model {
     
     public function addVisite($visited_id, $url, $title, $date, $ip_adress, $user_id) {
 
-        $this->db->query("INSERT INTO ". DB_PREFIX . "visited (url, title, date,p_adress,user) 
-                        VALUES (".$this->db->escape($visited_id).",
+        $this->db->query("INSERT INTO ". DB_PREFIX . "visited (visited_id,url, title, date,p_adress,user) 
+                        VALUES (".(int)($visited_id).",
                          ".$this->db->escape($url).",
                          ".$this->db->escape($title).",
                          ".$this->db->escape($date).",
@@ -13,6 +13,6 @@ class ModelVisitedVisited extends Model {
         
     }
     
-    
+
 
 }
