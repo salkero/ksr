@@ -15,7 +15,7 @@ class ModelVisitedVisited extends Model {
     //fonction de suppression                    
     public function removeVisite($visited_id){
 
-        $this->db->query("DELETE FROM ".DB_PREFIX. "visited  WHERE visited_id = " .$visited_id.);
+        $this->db->query("DELETE FROM ".DB_PREFIX. "visited  WHERE visited_id = " .$visited_id);
                             
     }
     
