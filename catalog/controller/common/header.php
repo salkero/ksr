@@ -3,6 +3,39 @@ class ControllerCommonHeader extends Controller {
 	public function index() {
 		// Analytics
 		$this->load->model('setting/extension');
+		$this->load->model('visited/visited');
+
+		// fonction pour aller chercher le nom du produit
+		$this->load->model('catalog/product');
+		
+		//print_r($this->request->get['route']);
+		
+		//$productSalah = $this->model_catalog_product->getProduct('49');
+		//print_r($productSalah['name']);
+
+		$uri= ($_SERVER["REQUEST_URI"]);
+	
+
+		if ( strstr( $uri, 'product_id=' ) ) {
+			$productId =	substr(strrchr($uri, "="), 1);
+			echo($productId);
+			$infoProduct = $this->model_catalog_product->getProduct($productId);
+			print_r($infoProduct['name']);
+
+		  } else {
+			echo ($uri);
+		  }
+		
+
+	    // transformer cette url :
+		//tp2opencart/index.php?route=product/product&path=20_27&product_id=41
+		// a cette url:
+		//tp2opencart/index.php?route=product/product&path=20_27&samsung10gti
+
+
+		
+
+
 
 		$data['analytics'] = array();
 
