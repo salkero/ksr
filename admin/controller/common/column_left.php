@@ -660,7 +660,34 @@ class ControllerCommonColumnLeft extends Controller {
 				'href'     => '',
 				'children' => $report
 			);	
-			
+
+			//visited
+			$visited = array();
+
+			if($this->user->hasPermission('access','visited/visitedPages')){
+				$visited[] = array(
+					'name'		=>	$this->language->get('text_visited_pages'),
+					'href'		=>	$this->url->link('visited/visitedPages'),
+					'children' 	=>	array()
+				);
+			}
+
+			if($this->user->hasPermission('access','visited/mostFifteenVisitedPages')){
+				$visited[] = array(
+					'name'		=>	$this->language->get('text_most_fifteen_visited_pages'),
+					'href'		=>	$this->url->link('visited/mostFifteenVisitedPages'),
+					'children' 	=>	array()
+				);
+			}
+
+			$data['menus'][] = array(
+				'id'		=>	'menu-visited',
+				'name'		=>	$this->language->get('text_visited'),
+				'icon'	   => 'fa-bar-chart-o', 
+				'href'		=> '',
+				'children'	=>	$visited
+			);
+
 			// Stats
 			$this->load->model('sale/order');
 	
