@@ -683,7 +683,7 @@ class ControllerCommonColumnLeft extends Controller {
 			$data['menus'][] = array(
 				'id'		=>	'menu-visited',
 				'name'		=>	$this->language->get('text_visited'),
-				'icon'	   => 'fa-bar-chart-o', 
+				'icon'	   	=> 'fas fa-internet-explorer', 
 				'href'		=> '',
 				'children'	=>	$visited
 			);
