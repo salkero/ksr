@@ -664,18 +664,18 @@ class ControllerCommonColumnLeft extends Controller {
 			//visited
 			$visited = array();
 
-			if($this->user->hasPermission('access','visited/visitedPages')){
+			if($this->user->hasPermission('access','visited/visited_pages')){
 				$visited[] = array(
 					'name'		=>	$this->language->get('text_visited_pages'),
-					'href'		=>	$this->url->link('visited/visitedPages'),
+					'href'		=>	$this->url->link('visited/visited_pages', 'user_token=' . $this->session->data['user_token'], true),
 					'children' 	=>	array()
 				);
 			}
 
-			if($this->user->hasPermission('access','visited/mostFifteenVisitedPages')){
+			if($this->user->hasPermission('access','visited/most_fifteen_visited_pages')){
 				$visited[] = array(
 					'name'		=>	$this->language->get('text_most_fifteen_visited_pages'),
-					'href'		=>	$this->url->link('visited/mostFifteenVisitedPages'),
+					'href'		=>	$this->url->link('visited/most_fifteen_visited_pages', 'user_token=' . $this->session->data['user_token'], true),
 					'children' 	=>	array()
 				);
 			}
