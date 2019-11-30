@@ -88,3 +88,6 @@ $_['text_paypal_search']        = 'Search';
 $_['text_complete_status']      = 'Orders Completed';
 $_['text_processing_status']    = 'Orders Processing';
 $_['text_other_status']         = 'Other Statuses';
+$_['text_visited']              = 'Visited';
+$_['text_visited_pages']        = 'visited pages list';
+$_['text_most_fifteen_visited_pages']         = 'the most 15 visited pages';
