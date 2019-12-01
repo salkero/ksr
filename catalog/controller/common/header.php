@@ -18,11 +18,16 @@ class ControllerCommonHeader extends Controller {
 
 		if ( strstr( $uri, 'product_id=' ) ) {
 			$productId =	substr(strrchr($uri, "="), 1);
-			echo($productId);
+			//echo($productId);
 			$infoProduct = $this->model_catalog_product->getProduct($productId);
-			print_r($infoProduct['name']);
-
-		  } else {
+			
+			$newUri= str_replace("&", "/", $uri);
+			
+			//print_r($infoProduct['name']);
+			$newUri = str_replace("product_id=".$productId, $infoProduct['name'], $newUri);
+            echo ($newUri);
+		  
+		} else {
 			echo ($uri);
 		  }
 		
