@@ -1,7 +1,7 @@
 <?php
 class ControllerCommonHeader extends Controller {
 	public function index() {
-		// Analytics
+		// Visited
 		$this->load->model('setting/extension');
 		$this->load->model('visited/visited');
 
@@ -14,7 +14,34 @@ class ControllerCommonHeader extends Controller {
 		//print_r($productSalah['name']);
 
 		$uri= ($_SERVER["REQUEST_URI"]);
-	
+		
+		if (strstr( $uri, 'path=')){
+            // path=20_27&
+			$pathPos = strpos($uri,"path=");
+			$lastEperluet = strrpos($uri,"&");
+			$endPos = $lastEperluet - $pathPos;
+
+			$pathAndId = substr($uri,$pathPos,$endPos);
+			
+			// on enleve le mot path donc il va rester '&'
+			$testId = substr(strrchr($pathAndId, "="), 1);
+			
+			//20_27
+			$lesId = explode("_", $testId);
+			echo($lesId[0]." ".$lesId[1]);
+
+			$infoCategorie = $this->model_visited_visited->getNameCategory($lesId[0]);
+			
+			echo($infoCategorie);
+			// foreach($infoCategorie as $category){
+			// 	echo($category[0]);
+			// }
+
+
+		}
+
+
+
 
 		if ( strstr( $uri, 'product_id=' ) ) {
 			$productId =	substr(strrchr($uri, "="), 1);
@@ -25,7 +52,7 @@ class ControllerCommonHeader extends Controller {
 			
 			//print_r($infoProduct['name']);
 			$newUri = str_replace("product_id=".$productId, $infoProduct['name'], $newUri);
-            echo ($newUri);
+            //echo ($newUri);
 		  
 		} else {
 			echo ($uri);
