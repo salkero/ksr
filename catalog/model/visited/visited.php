@@ -21,7 +21,8 @@ class ModelVisitedVisited extends Model {
 
     public function getNameCategory($category_id){
 
-        $this->db->query("SELECT * FROM ". DB_PREFIX . "category_description WHERE category_id = " .$category_id);
+        $resultat = $this->db->query("SELECT name FROM ". DB_PREFIX . "category_description WHERE category_id = " .$category_id);
+        return $resultat->row['name'];
     }
     
 
