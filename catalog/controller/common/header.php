@@ -59,17 +59,6 @@ class ControllerCommonHeader extends Controller {
 			  
 			} 
 		}
-	
-		
-
-	    // transformer cette url :
-		//tp2opencart/index.php?route=product/product&path=20_27&product_id=41
-		// a cette url:
-		//tp2opencart/index.php?route=product/product&path=20_27&samsung10gti
-
-
-		
-
 
 		// Analytics
 		$data['analytics'] = array();
