@@ -8,55 +8,58 @@ class ControllerCommonHeader extends Controller {
 		// fonction pour aller chercher le nom du produit
 		$this->load->model('catalog/product');
 		
-		//print_r($this->request->get['route']);
-		
-		//$productSalah = $this->model_catalog_product->getProduct('49');
-		//print_r($productSalah['name']);
-
 		$uri= ($_SERVER["REQUEST_URI"]);
+		$newUri= str_replace("&", "/", $uri);
 		
-		if (strstr( $uri, 'path=')){
-            // path=20_27&
-			$pathPos = strpos($uri,"path=");
-			$lastEperluet = strrpos($uri,"&");
-			$endPos = $lastEperluet - $pathPos;
 
-			$pathAndId = substr($uri,$pathPos,$endPos);
+		if(strpos($newUri, "category") !== false){
+			$endPos = strlen($newUri);
+			$pathPos = strpos($newUri,"path=");
 			
-			// on enleve le mot path donc il va rester '&'
+			$pathAndId = substr($newUri,$pathPos,$endPos);
 			$testId = substr(strrchr($pathAndId, "="), 1);
-			
-			//20_27
 			$lesId = explode("_", $testId);
-			echo($lesId[0]." ".$lesId[1]);
-
-			$infoCategorie = $this->model_visited_visited->getNameCategory($lesId[0]);
+			$path1 = $this->model_visited_visited->getNameCategory($lesId[0]);
+			$path2 = $this->model_visited_visited->getNameCategory($lesId[1]);
 			
-			echo($infoCategorie);
-			// foreach($infoCategorie as $category){
-			// 	echo($category[0]);
-			// }
-
-
+			$path = $path1."/".$path2;
+		
+			$newUri = substr_replace($newUri,$path,$pathPos,$endPos);
+			echo($newUri);
 		}
-
-
-
-
-		if ( strstr( $uri, 'product_id=' ) ) {
-			$productId =	substr(strrchr($uri, "="), 1);
-			//echo($productId);
-			$infoProduct = $this->model_catalog_product->getProduct($productId);
+		else{
+			if (strpos( $newUri, 'path=') !== false){
+				// path=20_27&
+				$pathPos = strpos($newUri,"path=");
+				$lastSlash = strrpos($newUri,"/");
+				$endPos = $lastSlash - $pathPos;
+				$pathAndId = substr($newUri,$pathPos,$endPos);
+	
+				// on enleve 'path='
+				$testId = substr(strrchr($pathAndId, "="), 1);
 			
-			$newUri= str_replace("&", "/", $uri);
-			
-			//print_r($infoProduct['name']);
-			$newUri = str_replace("product_id=".$productId, $infoProduct['name'], $newUri);
-            //echo ($newUri);
-		  
-		} else {
-			echo ($uri);
-		  }
+	
+				//20_27
+				$lesId = explode("_", $testId);
+				$path1 = $this->model_visited_visited->getNameCategory($lesId[0]);
+				$path2 = $this->model_visited_visited->getNameCategory($lesId[1]);
+				
+				$path = $path1."/".$path2;
+		
+				$newUri = substr_replace($newUri,$path,$pathPos,$endPos);
+			}
+	
+			if ( strpos( $newUri, 'product_id=' ) !== false ) {
+				$productId =	substr(strrchr($newUri, "="), 1);
+				
+				$infoProduct = $this->model_catalog_product->getProduct($productId);
+				
+				$newUri = str_replace("product_id=".$productId, $infoProduct['name'], $newUri);
+				echo ($newUri);
+			  
+			} 
+		}
+	
 		
 
 	    // transformer cette url :
@@ -68,7 +71,7 @@ class ControllerCommonHeader extends Controller {
 		
 
 
-
+		// Analytics
 		$data['analytics'] = array();
 
 		$analytics = $this->model_setting_extension->getExtensions('analytics');
