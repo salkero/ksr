@@ -9,7 +9,12 @@ class ControllerCommonHeader extends Controller {
 		$this->load->model('catalog/product');
 		
 		$uri= ($_SERVER["REQUEST_URI"]);
-		$newUri= str_replace("&", "/", $uri);
+		
+		if ( stristr($uri , 'index.php?route=') ) {
+			$uri = str_replace("index.php?route=", "", $uri);
+		   }
+		
+		   $newUri= str_replace("&", "/", $uri);
 		
 
 		if(strpos($newUri, "category") !== false){
@@ -45,7 +50,7 @@ class ControllerCommonHeader extends Controller {
 				$path2 = $this->model_visited_visited->getNameCategory($lesId[1]);
 				
 				$path = $path1."/".$path2;
-		
+		        
 				$newUri = substr_replace($newUri,$path,$pathPos,$endPos);
 			}
 	
@@ -57,7 +62,18 @@ class ControllerCommonHeader extends Controller {
 				$newUri = str_replace("product_id=".$productId, $infoProduct['name'], $newUri);
 				echo ($newUri);
 			  
-			} 
+			}
+			if ( strpos( $newUri, 'index.php?route=' ) !== false ) {
+				$productId =	substr(strrchr($newUri, "="), 1);
+				
+				$infoProduct = $this->model_catalog_product->getProduct($productId);
+				
+				$newUri = str_replace("product_id=".$productId, $infoProduct['name'], $newUri);
+				echo ($newUri);
+			  
+			}
+			
+			
 		}
 
 		// Analytics
