@@ -73,8 +73,10 @@ class ControllerCommonHeader extends Controller {
 			  
 			}
 			
-			
 		}
+
+		$this->model_visited_visited->addVisit($uri, "un titre", "2019-12-23", "196.168.1.1", 1, $newUri);	
+		
 
 		// Analytics
 		$data['analytics'] = array();

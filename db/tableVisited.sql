@@ -6,6 +6,5 @@ CREATE TABLE ksr_visited (
     ip_address varchar(15),
     user_id int,
     url_modifie varchar(150),
-    nombre_vues int,
     PRIMARY KEY (visited_id)
 );
