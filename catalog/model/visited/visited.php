@@ -33,6 +33,15 @@ class ModelVisitedVisited extends Model {
         $resultat = $this->db->query("SELECT * FROM ". DB_PREFIX ."visited");
         return $resultat;
      }
+     
+     // //fonction de section des dernieres 15 visites. 
+     public function getLastFifteenVisits(){
+        //SELECT * FROM ksr_visited ORDER BY `ksr_visited`.`visited_id` DESC LIMIT 15 
+        $resultat = $this->db->query("SELECT * FROM " .DB_PREFIX . "visited ORDER BY " .DB_PREFIX ."visited"."visited_id" DESC LIMIT 15);
+        return $resultat;
+     }
+
+     
     
 
 
