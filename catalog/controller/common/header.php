@@ -7,7 +7,37 @@ class ControllerCommonHeader extends Controller {
 
 		// fonction pour aller chercher le nom du produit
 		$this->load->model('catalog/product');
-		
+
+
+
+
+	//Trouver l'adresse ip
+    if (!empty($_SERVER['HTTP_CLIENT_IP']))  
+    {
+      $ip=$_SERVER['HTTP_CLIENT_IP'];
+    }
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) 
+    {
+      $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    else
+    {
+      $ip=$_SERVER['REMOTE_ADDR'];
+	}
+echo $ip;
+	
+	// touver la date courante
+	  
+		echo $date = date('Y-m-d');
+	
+	// trouver le itre de la page
+
+	$titre = $this->document->getTitle();
+	echo $titre;
+	
+	 
+	
+	// trouver uri
 		$uri= ($_SERVER["REQUEST_URI"]);
 		
 		if ( stristr($uri , 'index.php?route=') ) {
@@ -30,7 +60,7 @@ class ControllerCommonHeader extends Controller {
 			$path = $path1."/".$path2;
 		
 			$newUri = substr_replace($newUri,$path,$pathPos,$endPos);
-			echo($newUri);
+			//echo($newUri);
 		}
 		else{
 			if (strpos( $newUri, 'path=') !== false){
@@ -75,7 +105,7 @@ class ControllerCommonHeader extends Controller {
 			
 		}
 
-		$this->model_visited_visited->addVisit($uri, "un titre", "2019-12-23", "196.168.1.1", 1, $newUri);	
+		$this->model_visited_visited->addVisit($uri, $titre, $date, $ip, 1, $newUri);	
 		
 
 		// Analytics
