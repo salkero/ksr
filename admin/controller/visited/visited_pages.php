@@ -5,10 +5,10 @@ class ControllerVisitedVisitedPages extends Controller {
 	public function index() {
 		echo("visited pages");
 
-		$this->load->language('visited/visited');
+		$this->load->language('visited/visited_pages');
 
 		$this->load->model('visited/visited');
-		$this->document->setitle($this->language->get('heading_title'));
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->getList();
 	}
@@ -30,23 +30,23 @@ class ControllerVisitedVisitedPages extends Controller {
 			'href'	=> $this->url->link('visited/visited_pages','user_token='. $this->session->data['user_token'],true)
 		);
 
-		$data['AllPages'] = array();
-		$results = $this->model_visited_visited->getAllVisits();
+		$data['allPages'] = array();
+		$results = $this->model_visited_visited->getAllVisitedPages();
 		
 		foreach($results as $result){
 			$data['allPages'][]	= array(
-				''	=> $result[''],
-				''	=> $result[''],
-				''	=> $result[''],
-				''	=> $result[''],
-				''	=> $result[''],
-				''	=> $result[''],
-				''	=> $result['']
+				'url'	=> $result['url'],
+				'title'	=> $result['title'],
+				'date'	=> $result['date'],
+				'ip_address'	=> $result['ip_address'],
+				'url_modifie'	=> $result['url_modifie'],
+				'user_id'	=> $result['user_id'],
+				
 			);
 		}
 
 		// on recupere le token
-		$data['user_token']	= $this->session->['user_token'];
+		$data['user_token']	= $this->session->data['user_token'];
 
 		// on prepare le message d'avertissement
 		if(isset($this->error['warning'])) {
@@ -67,8 +67,8 @@ class ControllerVisitedVisitedPages extends Controller {
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer']	= $this->load->controller('common/footer');
 
-		// ona ffiche la vue
-		//$this->response->setOutput($this->load->view('visited/visited',$data));
+		// on affiche la vue
+		$this->response->setOutput($this->load->view('visited/visited_pages',$data));
 	}
 
 	
