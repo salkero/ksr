@@ -23,13 +23,13 @@
     {% endif %}
 
     <!-- Panneau d'affichage -->
-    <div class="panel panel-default">
+    <div>
       
-      <div class="panel-body">
-        <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-option">
-          <div class="table-responsive">
+      <div>
+        
+          <div>
             
-            <table class="table table-bordered table-hover">
+            <table id="example" class="display" style="width:100%">
               
               <thead>
                   <tr>
@@ -41,22 +41,19 @@
                       
                   </tr>
               </thead>
-                    
-              
-              
-              
+                         
                <tbody>
-                {% if allNews %}
-                {% for news in allNews %}
+                {% if allPages %}
+                {% for page in allPages %}
                 <tr>
-                  <td class="text-center">{% if news.news_id in selected %}
-                    <input type="checkbox" name="selected[]" value="{{ news.news_id }}" checked="checked" />
-                    {% else %}
-                    <input type="checkbox" name="selected[]" value="{{ news.news_id }}" />
-                    {% endif %}</td>
-                  <td class="text-left">{{ news.title }}</td>
-                  <td class="text-left">{{ news.auteur }}</td>
-                  <td class="text-right"><a href="{{ news.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+          
+                  <td>{{ page.url}}</td>
+                  <td>{{ page.title}}</td>
+                  <td>{{ page.date}}</td>
+                  <td>{{ page.ip_address}}</td>
+                  <td>{{ page.user_id}}</td>
+                  
+                  
                 </tr>
                 {% endfor %}
                 {% else %}
@@ -66,8 +63,9 @@
                 {% endif %}
               </tbody>
             </table>
+            
           </div>
-        </form>
+       
       </div>
     </div>
 
