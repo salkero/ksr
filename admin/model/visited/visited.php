@@ -18,6 +18,13 @@ class ModelVisitedVisited extends Model {
         $this->db->query("DELETE FROM ".DB_PREFIX. "visited  WHERE visited_id = " .$visited_id);
                             
     }
+
+    public function getAllVisitedPages(){
+
+        $resultat = $this->db->query("SELECT * FROM " .DB_PREFIX . "visited");
+        return $resultat->rows;
+
+    }
     
 
 
