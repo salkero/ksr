@@ -3,7 +3,7 @@ class ControllerVisitedVisitedPages extends Controller {
 	private $error = array();
 
 	public function index() {
-		echo("visited pages");
+	
 
 		$this->load->language('visited/visited_pages');
 
@@ -13,7 +13,7 @@ class ControllerVisitedVisitedPages extends Controller {
 		$this->getList();
 	}
 
-	// on va chercher toutes les news
+	// on va chercher toutes les pages
 	public function getList(){
 
 		// on prepare le fil d'arianne
