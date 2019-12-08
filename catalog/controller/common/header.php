@@ -58,7 +58,7 @@ class ControllerCommonHeader extends Controller {
 			$path = $path1."/".$path2;
 		
 			$newUri = substr_replace($newUri,$path,$pathPos,$endPos);
-			//echo($newUri);
+			
 		}
 		else{
 			if (strpos( $newUri, 'path=') !== false){
@@ -88,7 +88,7 @@ class ControllerCommonHeader extends Controller {
 				$infoProduct = $this->model_catalog_product->getProduct($productId);
 				
 				$newUri = str_replace("product_id=".$productId, $infoProduct['name'], $newUri);
-				echo ($newUri);
+				
 			  
 			}
 			if ( strpos( $newUri, 'index.php?route=' ) !== false ) {
@@ -97,7 +97,7 @@ class ControllerCommonHeader extends Controller {
 				$infoProduct = $this->model_catalog_product->getProduct($productId);
 				
 				$newUri = str_replace("product_id=".$productId, $infoProduct['name'], $newUri);
-				echo ($newUri);
+				
 			  
 			}
 			
