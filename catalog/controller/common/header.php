@@ -8,7 +8,10 @@ class ControllerCommonHeader extends Controller {
 		// fonction pour aller chercher le nom du produit
 		$this->load->model('catalog/product');
 
-
+		//variable pour l'enregistrement Visited
+		date_default_timezone_set('America/Toronto');
+		$date = date("Y-m-d H:i:s"); 
+		$user_id = 0;
 
 
 	//Trouver l'adresse ip
@@ -24,18 +27,13 @@ class ControllerCommonHeader extends Controller {
     {
       $ip=$_SERVER['REMOTE_ADDR'];
 	}
-echo $ip;
 	
-	// touver la date courante
-	  
-		echo $date = date('Y-m-d');
 	
-	// trouver le itre de la page
 
-	$titre = $this->document->getTitle();
-	echo $titre;
 	
-	 
+	// trouver le Titre de la page
+	$titre = $this->document->getTitle();
+		 
 	
 	// trouver uri
 		$uri= ($_SERVER["REQUEST_URI"]);
@@ -105,7 +103,15 @@ echo $ip;
 			
 		}
 
-		$this->model_visited_visited->addVisit($uri, $titre, $date, $ip, 1, $newUri);	
+		// recuperer id du user
+		if ($this->customer->isLogged()) {
+			$user_id = $this->customer->getId();
+		}
+
+		$this->model_visited_visited->addVisit($uri, $titre, $date, $ip, $newUri, $user_id );
+			
+		
+			
 		
 
 		// Analytics
