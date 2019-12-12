@@ -30,16 +30,29 @@ class ModelVisitedVisited extends Model {
     
     //fonction de section de toute les visites. 
     public function getAllVisits(){
-        $resultat = $this->db->query("SELECT * FROM ". DB_PREFIX ."visited");
-        return $resultat;
+        $resultat = $this->db->query("SELECT * FROM ". DB_PREFIX ."visited 
+                                    WHERE title != 'Your Store' 
+                                    AND title != 'Account Login' 
+                                    AND title != 'Account Logout' 
+                                    AND title != 'My Account'");
+        return $resultat->rows;
      }
      
-    //  // //fonction de section des dernieres 15 visites. 
-    //  public function getLastFifteenVisits(){
-    //     //SELECT * FROM ksr_visited ORDER BY `ksr_visited`.`visited_id` DESC LIMIT 15 
-    //     $resultat = $this->db->query("SELECT * FROM " .DB_PREFIX . "visited ORDER BY " .DB_PREFIX ."visited"."visited_id" DESC LIMIT 15);
-    //     return $resultat;
-    //  }
+    // fonction de section des dernieres 15 visites. 
+    public function getLastFifteenMostVisited(){
+
+     
+        $resultat = $this->db->query("SELECT *, COUNT(*) as nbVisit 
+                                    FROM " .DB_PREFIX."visited 
+                                    WHERE title != 'Your Store' 
+                                    AND title != 'Account Login' 
+                                    AND title != 'Account Logout' 
+                                    AND title != 'My Account' 
+                                    GROUP BY url 
+                                    ORDER BY nbVisit 
+                                    DESC LIMIT 15");
+        return $resultat->rows;
+    }
 
      
     
