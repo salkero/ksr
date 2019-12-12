@@ -12,4 +12,5 @@ $_['column_date']           = 'Date';
 $_['column_ip_adress']      = 'IP adress';
 $_['column_url_modifie']    = 'Modified url';
 $_['column_user_id']        = 'User id';
+$_['column_nb_visit']       = 'Number of visits';
 
