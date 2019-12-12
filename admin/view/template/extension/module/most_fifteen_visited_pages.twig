@@ -1,0 +1,80 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+
+    <!-- Panneau d'affichage -->
+    <div>
+      
+      <div>
+        
+          <div>
+            
+            <table id="example" class="display" style="width:100%">
+              
+              <thead>
+                  <tr>
+                      <td>{{ column_url }}</td>
+                      <td>{{ column_title }}</td>
+                      <td>{{ column_date }}</td>
+                      <td>{{ column_ip_address }}</td>
+                      <td>{{ column_user_id }}</td>
+                      <td>{{ column_nb_visit }}</td>
+
+                      
+                  </tr>
+              </thead>
+                         
+               <tbody>
+                {% if allPages %}
+                {% for page in allPages %}
+                <tr>
+          
+                  <td>{{ page.url_modifie}}</td>
+                  <td>{{ page.title}}</td>
+                  <td>{{ page.date}}</td>
+                  <td>{{ page.ip_address}}</td>
+                  <td>{{ page.user_id}}</td>
+                  <td>{{ page.nombreVisite }}</td>
+                  
+                  
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                  <td class="text-center" colspan="4">{{ text_no_results }}</td>
+                </tr>
+                {% endif %}
+              </tbody>
+            </table>
+            
+          </div>
+       
+      </div>
+    </div>
+
+    <!-- fin du panneau d'affichage -->
+
+
+  </div>
+</div>
+{{ footer }}
