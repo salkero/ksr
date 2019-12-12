@@ -661,32 +661,7 @@ class ControllerCommonColumnLeft extends Controller {
 				'children' => $report
 			);	
 
-			//visited
-			$visited = array();
-
-			if($this->user->hasPermission('access','visited/visited_pages')){
-				$visited[] = array(
-					'name'		=>	$this->language->get('text_visited_pages'),
-					'href'		=>	$this->url->link('visited/visited_pages', 'user_token=' . $this->session->data['user_token'], true),
-					'children' 	=>	array()
-				);
-			}
-
-			if($this->user->hasPermission('access','visited/most_fifteen_visited_pages')){
-				$visited[] = array(
-					'name'		=>	$this->language->get('text_most_fifteen_visited_pages'),
-					'href'		=>	$this->url->link('visited/most_fifteen_visited_pages', 'user_token=' . $this->session->data['user_token'], true),
-					'children' 	=>	array()
-				);
-			}
-
-			$data['menus'][] = array(
-				'id'		=>	'menu-visited',
-				'name'		=>	$this->language->get('text_visited'),
-				'icon'	   	=> 'fas fa-internet-explorer', 
-				'href'		=> '',
-				'children'	=>	$visited
-			);
+			
 
 			// Stats
 			$this->load->model('sale/order');
