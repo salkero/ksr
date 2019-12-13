@@ -52,8 +52,7 @@ class ModelExtensionModuleVisited extends Model {
         ip_address varchar(15),
         user_id int,
         url_modifie varchar(150),
-        PRIMARY KEY (visited_id))");
-       
+        PRIMARY KEY (visited_id))");    
       
     }
     
