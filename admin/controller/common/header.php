@@ -75,6 +75,19 @@ class ControllerCommonHeader extends Controller {
 				);
 			}
 		}
+		$url = $_SERVER["REQUEST_URI"];
+
+		if ( stristr($url , 'visited_pages') ) {
+			
+            $data['datatable']= true;
+
+		}else{
+
+			$data['datatable'] = false;
+
+		}
+
+	
 
 		return $this->load->view('common/header', $data);
 	}
