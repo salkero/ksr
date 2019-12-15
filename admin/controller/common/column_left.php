@@ -659,7 +659,31 @@ class ControllerCommonColumnLeft extends Controller {
 				'name'	   => $this->language->get('text_reports'),
 				'href'     => '',
 				'children' => $report
-			);	
+			);
+			
+
+
+			$this->load->language('extension/module/visited_pages');
+			$visit = array();
+
+			if ($this->user->hasPermission('access', 'extension/module/visited_pages')) {
+
+				$visit[] = array(
+
+					'name' => $this->language->get('text_visit_list'),
+					'href' => $this->url->link('extension/module/visited_pages', 'user_token=' . $this->session->data['user_token'], true),
+                    'children' => array()	
+
+				);
+			}
+			
+			$data['menus'][] = array(
+				'id'       => 'menu-visit',
+				'icon'	   => 'fa-internet-explorer', 
+				'name'	   => $this->language->get('text_visit'),
+				'href'     => '',
+				'children' => $visit
+			);
 
 			
 
