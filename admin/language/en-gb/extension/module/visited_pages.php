@@ -1,10 +1,9 @@
 <?php
 
 $_['']         = '';
-$_['heading_title']         = 'Visited Pages';
-$_['text_home']             = 'Visited Pages';
 $_['text_visit']            = 'Visited Pages';
 $_['text_visit_list']       = 'Visited Pages Lists';
+$_['text_fifteen_most_visited_pages'] = 'Most fifteen visited pages';
 
 // Column
 $_['column_url']            = 'Url';
