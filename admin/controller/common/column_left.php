@@ -676,7 +676,22 @@ class ControllerCommonColumnLeft extends Controller {
 
 				);
 			}
+
+		
+
 			
+			if ($this->user->hasPermission('access', 'extension/module/fifteen_most_visited_pages')) {
+
+				$visit[] = array(
+
+					'name' => $this->language->get('text_fifteen_most_visited_pages'),
+					'href' => $this->url->link('extension/module/fifteen_most_visited_pages', 'user_token=' . $this->session->data['user_token'], true),
+                    'children' => array()	
+
+				);
+			}
+			
+
 			$data['menus'][] = array(
 				'id'       => 'menu-visit',
 				'icon'	   => 'fa-internet-explorer', 
@@ -684,6 +699,10 @@ class ControllerCommonColumnLeft extends Controller {
 				'href'     => '',
 				'children' => $visit
 			);
+
+			
+
+
 
 			
 
