@@ -662,30 +662,48 @@ class ControllerCommonColumnLeft extends Controller {
 			);
 			
 
+			$module_visited = 'visited_pages';
+			$module_fifteen = 'fifteen_most_visited_pages';
+            $this->load->model('setting/extension');
+			$installed_modules = $this->model_setting_extension->getInstalled('module');
 
+			$this->load->language('extension/module/fifteen_most_visited_pages');
 			$this->load->language('extension/module/visited_pages');
 			$visit = array();
 
 			if ($this->user->hasPermission('access', 'extension/module/visited_pages')) {
+			
+				if(in_array($module_visited, $installed_modules)) {
+					$href_visited = $this->url->link('extension/module/visited_pages', 'user_token=' . $this->session->data['user_token'], true);
+				}else{
+					$href_visited = $this->url->link('error/visited_error_page', 'user_token=' . $this->session->data['user_token'], true);
+					;
+				
+				}
 
 				$visit[] = array(
 
 					'name' => $this->language->get('text_visit_list'),
-					'href' => $this->url->link('extension/module/visited_pages', 'user_token=' . $this->session->data['user_token'], true),
+					'href' =>	$href_visited,
                     'children' => array()	
 
 				);
 			}
-
-		
-
 			
 			if ($this->user->hasPermission('access', 'extension/module/fifteen_most_visited_pages')) {
+
+				if(in_array($module_visited, $installed_modules)) {
+					$href_fifteen = $this->url->link('extension/module/fifteen_most_visited_pages', 'user_token=' . $this->session->data['user_token'], true);
+				}else{
+					$href_fifteen = $this->url->link('error/visited_error_page', 'user_token=' . $this->session->data['user_token'], true);
+					;
+				
+				}
 
 				$visit[] = array(
 
 					'name' => $this->language->get('text_fifteen_most_visited_pages'),
-					'href' => $this->url->link('extension/module/fifteen_most_visited_pages', 'user_token=' . $this->session->data['user_token'], true),
+					'href' => $href_fifteen,
                     'children' => array()	
 
 				);
