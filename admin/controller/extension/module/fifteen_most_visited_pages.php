@@ -1,14 +1,14 @@
 <?php
-class ControllerExtensionModuleMostFifteenVisitedPages extends Controller {
+class ControllerExtensionModuleFifteenMostVisitedPages extends Controller {
 	private $error = array();
 
 	public function index() {
 	
 
-		$this->load->language('extension/module/visited_pages');
-
-		
+		$this->load->language('extension/module/fifteen_most_visited_pages');
+        $this->load->model('extension/module/visited');
 		$this->document->setTitle($this->language->get('heading_title'));
+		//$this->document->setTitle($this->language->get('text_visit'));
 
 		$this->getList();
 	}
@@ -21,13 +21,13 @@ class ControllerExtensionModuleMostFifteenVisitedPages extends Controller {
 
 		// on remplit le fil d'arianne avec le lien de la page d'accueil\
 		$data['breadcrumbs'][] = array(
-			'text'	=>	$this->language->get('text_home'),
+			'text'	=>	$this->language->get('text_visit'),
 			'href'		=>	$this->url->link('common/dashboard', 'user_token='. $this->session->data['user_token'],true)	
 		);
 
 		$data['breadcrumb'][]	=	array(
-			'text'	=> $this->language->get('heading_title'),
-			'href'	=> $this->url->link('extension/module/most_fifteen_visited_pages','user_token='. $this->session->data['user_token'],true)
+			'text'	=> $this->language->get('text_fifteen_most_visited_pages'),
+			'href'	=> $this->url->link('extension/module/fifteen_most_visited_pages','user_token='. $this->session->data['user_token'],true)
 		);
 
 		$data['allPages'] = array();
