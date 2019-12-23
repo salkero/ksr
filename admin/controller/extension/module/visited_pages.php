@@ -8,7 +8,7 @@ class ControllerExtensionModuleVisitedPages extends Controller {
 		$this->load->language('extension/module/visited_pages');
 
 		$this->load->model('extension/module/visited');
-		$this->document->setTitle($this->language->get('heading_title'));
+		$this->document->setTitle($this->language->get('text_visit'));
 
 		$this->getList();
 	}
@@ -21,12 +21,12 @@ class ControllerExtensionModuleVisitedPages extends Controller {
 
 		// on remplit le fil d'arianne avec le lien de la page d'accueil\
 		$data['breadcrumbs'][] = array(
-			'text'	=>	$this->language->get('text_home'),
+			'text'	=>	$this->language->get('text_visit'),
 			'href'		=>	$this->url->link('common/dashboard', 'user_token='. $this->session->data['user_token'],true)	
 		);
 
 		$data['breadcrumb'][]	=	array(
-			'text'	=> $this->language->get('heading_title'),
+			'text'	=> $this->language->get('text_visit_list'),
 			'href'	=> $this->url->link('extension/module/visited_pages','user_token='. $this->session->data['user_token'],true)
 		);
 
