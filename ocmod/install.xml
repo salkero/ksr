@@ -121,7 +121,7 @@
 
 		$this->model_visited_visited->addVisit($uri, $titre, $date, $ip, $newUri, $user_id );
 
-        echo $uri;
+    
 
             ]]>    
             </add>
