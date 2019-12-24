@@ -8,7 +8,6 @@ class ControllerExtensionModuleFifteenMostVisitedPages extends Controller {
 		$this->load->language('extension/module/fifteen_most_visited_pages');
         $this->load->model('extension/module/visited');
 		$this->document->setTitle($this->language->get('heading_title'));
-		//$this->document->setTitle($this->language->get('text_visit'));
 
 		$this->getList();
 	}
@@ -19,13 +18,12 @@ class ControllerExtensionModuleFifteenMostVisitedPages extends Controller {
 		// on prepare le fil d'arianne
 		$data['breadcrumbs'] = array();
 
-		// on remplit le fil d'arianne avec le lien de la page d'accueil\
 		$data['breadcrumbs'][] = array(
-			'text'	=>	$this->language->get('text_visit'),
-			'href'		=>	$this->url->link('common/dashboard', 'user_token='. $this->session->data['user_token'],true)	
+			'text' => $this->language->get('text_home'),
+			'href' => $this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token'], true)
 		);
 
-		$data['breadcrumb'][]	=	array(
+		$data['breadcrumbs'][]	=	array(
 			'text'	=> $this->language->get('text_fifteen_most_visited_pages'),
 			'href'	=> $this->url->link('extension/module/fifteen_most_visited_pages','user_token='. $this->session->data['user_token'],true)
 		);
