@@ -1,5 +1,15 @@
 <?php
 class ModelVisitedVisited extends Model {
+
+    //verification de la présence de la table
+    public function checkVisitedTable() {
+
+        $resultat = $this->db->query("SHOW TABLES LIKE '" . DB_PREFIX . "visited'");
+        return $resultat;
+    }
+
+
+
     //fonction d'ajout d'une visite.
     public function addVisit($url, $title, $date, $ip_address, $url_modifie, $user_id) {
 
