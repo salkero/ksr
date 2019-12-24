@@ -3,7 +3,7 @@
 $_['']         = '';
 $_['text_visit']            = 'Visited Pages';
 $_['text_visit_list']       = 'Visited Pages Lists';
-$_['heading_title']  = 'Visited pages';
+$_['heading_title']         = 'Visited pages list';
                    
 
 // Column

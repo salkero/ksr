@@ -1,8 +1,8 @@
 <?php
 
 $_['']         = '';
-$_['text_fifteen_most_visited_pages'] = 'Most fifteen visited pages';
-$_['heading_title']  = 'Visited pages Fifteen most';
+$_['text_fifteen_most_visited_pages']   = 'Most fifteen visited pages';
+$_['heading_title']                     = 'Visited pages Fifteen most';
                    
 
 // Column
