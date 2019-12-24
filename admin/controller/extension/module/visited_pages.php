@@ -21,11 +21,11 @@ class ControllerExtensionModuleVisitedPages extends Controller {
 
 		// on remplit le fil d'arianne avec le lien de la page d'accueil\
 		$data['breadcrumbs'][] = array(
-			'text'	=>	$this->language->get('text_visit'),
-			'href'		=>	$this->url->link('common/dashboard', 'user_token='. $this->session->data['user_token'],true)	
+			'text' => $this->language->get('text_home'),
+			'href' => $this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token'], true)
 		);
 
-		$data['breadcrumb'][]	=	array(
+		$data['breadcrumbs'][]	=	array(
 			'text'	=> $this->language->get('text_visit_list'),
 			'href'	=> $this->url->link('extension/module/visited_pages','user_token='. $this->session->data['user_token'],true)
 		);
