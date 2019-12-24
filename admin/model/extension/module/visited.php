@@ -1,7 +1,7 @@
 <?php
 class ModelExtensionModuleVisited extends Model {
     //fonction d'ajout
-    public function addVisite($url, $title, $date, $ip_adress, $user_id) {
+    public function addVisit($url, $title, $date, $ip_adress, $user_id) {
 
         $this->db->query("INSERT INTO ". DB_PREFIX . "visited (url, title, date, ip_adress, user_id) 
                         VALUES (
