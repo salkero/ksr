@@ -62,11 +62,15 @@
 			
 			$pathAndId = substr($newUri,$pathPos,$endPos);
 			$testId = substr(strrchr($pathAndId, "="), 1);
-			$lesId = explode("_", $testId);
-			$path1 = $this->model_visited_visited->getNameCategory($lesId[0]);
-			$path2 = $this->model_visited_visited->getNameCategory($lesId[1]);
-			
-			$path = $path1."/".$path2;
+
+			if ( stristr($testId , '_')){
+				$lesId = explode("_", $testId);
+				$path1 = $this->model_visited_visited->getNameCategory($lesId[0]);
+				$path2 = $this->model_visited_visited->getNameCategory($lesId[1]);
+				$path = $path1."/".$path2;
+			}else{
+					$path = $this->model_visited_visited->getNameCategory($testId);
+		        }
 		
 			$newUri = substr_replace($newUri,$path,$pathPos,$endPos);
 			
@@ -81,15 +85,15 @@
 	
 				// on enleve 'path='
 				$testId = substr(strrchr($pathAndId, "="), 1);
-			
-	
-				//20_27
-				$lesId = explode("_", $testId);
-				$path1 = $this->model_visited_visited->getNameCategory($lesId[0]);
-				$path2 = $this->model_visited_visited->getNameCategory($lesId[1]);
-				
-				$path = $path1."/".$path2;
-		        
+
+				if ( stristr($testId , '_')){
+					$lesId = explode("_", $testId);
+					$path1 = $this->model_visited_visited->getNameCategory($lesId[0]);
+					$path2 = $this->model_visited_visited->getNameCategory($lesId[1]);
+					$path = $path1."/".$path2;
+				}else{
+					$path = $this->model_visited_visited->getNameCategory($testId);
+		        }
 				$newUri = substr_replace($newUri,$path,$pathPos,$endPos);
 			}
 	
@@ -119,7 +123,11 @@
 			$user_id = $this->customer->getId();
 		}
 
-		$this->model_visited_visited->addVisit($uri, $titre, $date, $ip, $newUri, $user_id );
+		$visited_table = $this->model_visited_visited->checkVisitedTable();
+		if((boolean)$visited_table->num_rows) {
+			$this->model_visited_visited->addVisit($uri, $titre, $date, $ip, $newUri, $user_id );
+		}
+	
 
     
 
@@ -127,4 +135,96 @@
             </add>
         </operation>
     </file>
+
+	  <file path="admin/controller/common/header.php">
+        <operation>
+            <search>
+                <![CDATA[foreach ($results as $result) {]]>
+            </search>
+            <add position="after" offset="7">
+                <![CDATA[
+					$url = $_SERVER["REQUEST_URI"];
+
+					if ( stristr($url , 'visited_pages') ) {
+			
+            			$data['datatable']= true;
+
+					}else{
+
+					$data['datatable'] = false;
+					}
+            ]]>    
+            </add>
+        </operation>
+    </file>
+    
+    <file path="admin/controller/common/column_left.php">
+        <operation>
+            <search>
+                <![CDATA['children' => $report]]>
+            </search>
+            <add position="after" offset="2">
+                <![CDATA[$module_visited = 'visited_pages';
+			$module_fifteen = 'fifteen_most_visited_pages';
+            $this->load->model('setting/extension');
+			$installed_modules = $this->model_setting_extension->getInstalled('module');
+
+			$this->load->language('extension/module/fifteen_most_visited_pages');
+			$this->load->language('extension/module/visited_pages');
+			$visit = array();
+
+			if ($this->user->hasPermission('access', 'extension/module/visited_pages')) {
+			
+				if(in_array($module_visited, $installed_modules)) {
+					$href_visited = $this->url->link('extension/module/visited_pages', 'user_token=' . $this->session->data['user_token'], true);
+				}else{
+					$href_visited = $this->url->link('error/visited_error_page', 'user_token=' . $this->session->data['user_token'], true);
+					;
+				
+				}
+
+				$visit[] = array(
+
+					'name' => $this->language->get('text_visit_list'),
+					'href' =>	$href_visited,
+                    'children' => array()	
+
+				);
+			}
+			
+			if ($this->user->hasPermission('access', 'visited/fifteen_most_visited_pages')) {
+
+				if(in_array($module_visited, $installed_modules)) {
+					$href_fifteen = $this->url->link('visited/fifteen_most_visited_pages', 'user_token=' . $this->session->data['user_token'], true);
+				}else{
+					$href_fifteen = $this->url->link('error/visited_error_page', 'user_token=' . $this->session->data['user_token'], true);
+					;
+				
+				}
+
+				$visit[] = array(
+
+					'name' => $this->language->get('text_fifteen_most_visited_pages'),
+					'href' => $href_fifteen,
+                    'children' => array()	
+
+				);
+			}
+			
+
+			$data['menus'][] = array(
+				'id'       => 'menu-visit',
+				'icon'	   => 'fa-internet-explorer', 
+				'name'	   => $this->language->get('text_visit'),
+				'href'     => '',
+				'children' => $visit
+			);
+]]>    
+            </add>
+        </operation>
+    </file>
+    
+    
+    
+   
 </modification>
